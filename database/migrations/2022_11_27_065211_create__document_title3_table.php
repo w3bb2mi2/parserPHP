@@ -17,13 +17,13 @@ class CreateDocumentTitle3Table extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->string('title');
-            $table->string('Vid_ID');
-            $table->string('docRef_docUUID');
-            $table->string('docRef_presentation');
-            $table->string('creatorRef_agentUUID');
-            $table->string('creatorRef_presentation');
-            $table->dateTime('creation_time');
+            $table->string('title')->require();
+            $table->string('Vid_ID')->require();
+            $table->string('docRef_docUUID')->require();
+            $table->string('docRef_presentation')->require();
+            $table->string('creatorRef_agentUUID')->require();
+            $table->string('creatorRef_presentation')->require();
+            $table->string('creation_time')->require();
         });
     }
 

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers;
+use App\Http\Controllers\ParseController;
 use App\Service\Parser2\Parser;
 
 /*
@@ -16,13 +17,9 @@ use App\Service\Parser2\Parser;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/test', [TestController::class, 'index']);
-Route::get('/append', [TestController::class, 'append']);
+Route::view('/', "xmlParser");
 
-
-Route::get('/parser', [Parser::class, 'index']);
+Route::post('/xmlParser', [ParseController::class, 'index']);
+Route::get('/parser', [Parser::class, 'save2Db']);
 
