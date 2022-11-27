@@ -18,11 +18,12 @@ class CreateProcessInformationTable extends Migration
             $table->timestamps();
 
             $table->string('title');
-            $table->string('process_reference');
-            $table->string('process_presentation')->nullable();
-            $table->string('creator_reference');
-            $table->string('creator_presentation')->nullable();
-            $table->dateTime('creation_time');
+            $table->string('VidID');
+            $table->string('eventRef_eventUUID');
+            $table->string('eventRef_presentation');
+            $table->string('creatorRef_agentUUID');
+            $table->string('creatorRef_presentation');
+            $table->string('creation_time');
         });
     }
 

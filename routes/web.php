@@ -19,7 +19,11 @@ use App\Service\Parser2\Parser;
 
 
 Route::view('/', "xmlParser");
+Route::view('/success', "successLoading")->name("success");
 
 Route::post('/xmlParser', [ParseController::class, 'index']);
 Route::get('/parser', [Parser::class, 'save2Db']);
+
+
+Route::get('/test', [Parser::class, 'save2Db']);
 

@@ -18,9 +18,12 @@
                         <use xlink:href="#bootstrap"></use>
                     </svg>
                 </a>
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">                  
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                  
                     <li><a href="/" class="nav-link px-2 text-white">Домашняя страница</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">КПГУ 2</a></li>                    
+                    <li><a href="#" class="nav-link px-2 text-white">КПГУ 2</a></li>
+                    
                 </ul>
 
                 <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
@@ -32,12 +35,7 @@
     <div class="container">
         <div class="mb-3 mt-3">
             <!-- <form method="" enctype="multipart/form-data" action=""> -->
-            <form method="post" enctype="multipart/form-data" action="http://localhost:8000/xmlParser">
-                @csrf
-                <label for="formFile" class="form-label">Выберите файл</label>
-                <input class="form-control" type="file" id="formFile" name="file" >
-                <button type="submit" class="btn btn-primary mt-2">Отправить</button>
-            </form>
+            Файл успешно загружен
         </div>
     </div>
     <script src="./index.js"></script>

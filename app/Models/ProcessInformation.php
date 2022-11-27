@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class ProcessInformation extends Model
 {
     use HasFactory;
+    protected $table = "process_information";
+    protected $guarded = [];
 }

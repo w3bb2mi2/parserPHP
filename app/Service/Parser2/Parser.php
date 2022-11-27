@@ -2,17 +2,20 @@
 
 namespace App\Service\Parser2;
 
-use App\Models\DocumentTitle3;
+use App\Models\DocumentTitle;
+use App\Models\ProcessInformation;
 use DOMDocument;
+use Exception;
+use PhpParser\Node\Stmt\TryCatch;
 use XMLReader;
 
 class Parser
 {
 
-    static function index()
+    static function index($url)
     {
         $reader = new XMLReader();
-        $reader->open('http://resources/digital1.xml'); // указываем ридеру что будем парсить этот файл
+        $reader->open($url); // указываем ридеру что будем парсить этот файл
         $data = [];
         $data = array();
         while ($reader->read()) {
@@ -31,25 +34,58 @@ class Parser
                 }
                 if ($reader->localName == 'ВремяСоздания') {
                     $reader->read();
-                    if ($reader->depth == 4){
-                        $data["head"]['creation_time'] = $reader->value;                         ;
+                    if ($reader->depth == 4) {
+                        $data["head"]['creation_time'] = $reader->value;;
                         // $data["head"]['depth'] = $reader->depth;
                     }
-                }                
+                }
+
+
+                if ($reader->localName == 'СообщенияДокумента') {
+                    $reader->read();
+                    while ($reader->read()) {
+                        if ($reader->localName == 'ИнформацияОПроцессе') {
+                            $data["process_information"]['title'] = $reader->getAttribute('exc005:ВидНазвание');
+                            $data["process_information"]['VidID'] = $reader->getAttribute('exc005:ВидИД');
+                        }
+                        if ($reader->localName == 'СсылкаПроцесса') {
+                            $data["process_information"]['eventRef_eventUUID'] = $reader->getAttribute('cdm:ПроцессУУИД');
+                            $data["process_information"]['eventRef_presentation'] = $reader->getAttribute('cdm:Представление');
+                        }
+                        if ($reader->localName == 'СсылкаСоздателя') {
+                            $data["process_information"]['creatorRef_agentUUID'] = $reader->getAttribute('cdm:АгентУУИД');
+                            $data["process_information"]['creatorRef_presentation'] = $reader->getAttribute('cdm:Представление');
+                        }
+                        if ($reader->localName == 'ВремяСоздания') {
+                            $reader->read();
+                            if ($reader->depth == 6) {
+                                $data["process_information"]['creation_time'] = $reader->value;;
+                            }
+                        }
+                    }
+                }
             }
         }
-        // dd($data["head"]);
-        return $data["head"];
-       
+        return $data;
     }
-    static function save2Db(){
-        $data = Parser::index();
-        $saver = new DocumentTitle3();
-        $saver->create($data);
-        $saver->save();
-        dd("save to DB");
 
+    static function save2Db($url)
+    {
+        try {
+            $data = Parser::index($url);
+
+            echo "Запрос к базе";
+            // dd($data);
+            $head = new DocumentTitle();
+            $head->create($data["head"]);
+
+            $process_information = new ProcessInformation();
+            $process_information->create($data["process_information"]);
+
+            return $data;
+
+        } catch (Exception $e) {
+            echo 'Выброшено исключение: ',  $e->getMessage(), "\n";
+        }
     }
 }
-
-

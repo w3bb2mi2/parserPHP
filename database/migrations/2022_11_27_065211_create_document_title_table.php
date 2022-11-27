@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDocumentTitle3Table extends Migration
+class CreateDocumentTitleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateDocumentTitle3Table extends Migration
      */
     public function up()
     {
-        Schema::create('_document_title3', function (Blueprint $table) {
+        Schema::create('document_title', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
