@@ -15,7 +15,7 @@ class ParseController extends Controller
             echo "Произошла ошибка";
         }
 
-        $data = Parser::save2Db(__DIR__."\\temp\\".$_FILES["file"]["name"]);
+        $data = Parser::save2Db($path);
         
 
         return redirect()->route("success", $data);
