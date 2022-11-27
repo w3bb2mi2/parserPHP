@@ -15,8 +15,8 @@ return [
     |
     */
 
-    //'default' => env('DB_CONNECTION', 'pgsql'),
-    'default' => 'mysql',
+    'default' => env('DB_CONNECTION', 'pgsql'),
+    // 'default' => 'mysql',
 
     /*
     |--------------------------------------------------------------------------
@@ -71,7 +71,7 @@ return [
             'port' => env('DB_PORT', '5432'),
             'database' => env('DB_DATABASE', 'test'),
             'username' => env('DB_USERNAME', 'test'),
-            'password' => env('DB_PASSWORD', 'test1234'),
+            'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
