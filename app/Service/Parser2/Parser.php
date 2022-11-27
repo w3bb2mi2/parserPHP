@@ -75,7 +75,7 @@ class Parser
             $data = Parser::index($url);
 
             echo "Запрос к базе";
-            // dd($data);
+            dd($data);
             $head = new DocumentTitle();
             $head->create($data["head"]);
 
