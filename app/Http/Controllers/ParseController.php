@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 class ParseController extends Controller
 {
     public function index(){
+        //$path = __DIR__."\\temp\\".$_FILES["file"]["name"]; //windowsOS
         $path = __DIR__."/".'temp/'.$_FILES["file"]["name"];
+        
         if(move_uploaded_file($_FILES["file"]["tmp_name"], $path) ){
             echo "Файл успешно загружен";
         }else{
